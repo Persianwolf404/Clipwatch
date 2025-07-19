@@ -268,4 +268,4 @@ Developed by [Persianwolf404](https://github.com/Persianwolf404).
 - TypeScript
 - Clipboard Monitor
 - Open-Source
-```
+
