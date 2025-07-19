@@ -1,10 +1,3 @@
-Here is a comprehensive `README.md` file for your library **Clipwatch**, including detailed documentation for all functions, features, usage examples, and installation instructions.
-
----
-
-### README.md
-
-```markdown
 # Clipwatch
 
 **Clipwatch** is a TypeScript utility library to monitor clipboard changes, manage clipboard history, and handle regex-based clipboard matching. It is designed for browser environments and provides robust clipboard monitoring features.
