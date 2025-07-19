@@ -1,271 +1,333 @@
-# Clipwatch
 
-**Clipwatch** is a TypeScript utility library to monitor clipboard changes, manage clipboard history, and handle regex-based clipboard matching. It is designed for browser environments and provides robust clipboard monitoring features.
+# 📋 Clipwatch
+
+<div align="center">
+
+![Clipwatch Logo](https://img.shields.io/badge/Clipwatch-v1.0.0-blue?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+**🚀 A powerful TypeScript utility library to monitor clipboard changes in real-time!**
+
+[Installation](#-installation) • [Features](#-features) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation) • [Examples](#-examples)
+
+</div>
 
 ---
 
-## Features
+## 🌟 Overview
 
-- Monitor clipboard changes in real-time.
-- Avoid duplicate consecutive clipboard entries in history.
-- Enable/disable private mode to stop saving clipboard history.
-- Dynamically adjust polling intervals for clipboard monitoring.
-- Manage clipboard history with export/import options.
-- Trigger custom callbacks when clipboard text matches specific patterns.
+**Clipwatch** is your go-to TypeScript library for clipboard monitoring! 🎯 Whether you're building a clipboard manager, password detector, or any app that needs clipboard awareness, Clipwatch has got you covered with its robust and easy-to-use API.
 
 ---
 
-## Installation
+## ✨ Features
 
-Install the library via npm:
+- 🔄 **Real-time Monitoring** - Watch clipboard changes as they happen
+- 🚫 **Smart Duplicate Prevention** - No consecutive duplicate entries
+- 🕵️ **Private Mode** - Monitor without saving history
+- ⚡ **Dynamic Polling** - Adjust monitoring speed on-the-fly
+- 📚 **History Management** - Full control over clipboard history
+- 🎯 **Pattern Matching** - React to specific clipboard content with regex
+- 💾 **Import/Export** - Save and restore clipboard history
+- 🔒 **Secure** - Works only in secure contexts 
+
+---
+
+## 📦 Installation
+
+Get started in seconds with npm:
 
 ```bash
 npm install clipwatch
 ```
 
----
+Or with yarn:
 
-## Usage
-
-### Importing Functions
-
-You can import the functions directly from the library:
-
-```typescript
-import { startWatching, stopWatching, setThrottle, getClipboardHistory, addToHistory, clearClipboardHistory, exportClipboardHistory, importClipboardHistory, onClipboardChange, onClipboardMatch } from 'clipwatch';
+```bash
+yarn add clipwatch
 ```
 
 ---
 
-## Functions Documentation
-
-### Clipboard Monitoring
-
-#### `startWatching(options?: { interval?: number; private?: boolean }): void`
-Starts monitoring clipboard changes.
-
-- **Parameters**:
-  - `options` *(optional)*: Configuration object.
-    - `interval` *(number)*: Polling interval in milliseconds (default: `1000`).
-    - `private` *(boolean)*: Enable private mode (default: `false`).
-
-- **Example**:
-  ```typescript
-  startWatching({ interval: 500, private: true });
-  ```
-
----
-
-#### `stopWatching(): void`
-Stops monitoring clipboard changes.
-
-- **Example**:
-  ```typescript
-  stopWatching();
-  ```
-
----
-
-#### `setThrottle(ms: number): void`
-Dynamically adjusts the polling interval for clipboard monitoring.
-
-- **Parameters**:
-  - `ms` *(number)*: New polling interval in milliseconds.
-
-- **Example**:
-  ```typescript
-  setThrottle(2000); // Change polling interval to 2 seconds
-  ```
-
----
-
-#### `getCurrentClipboard(): Promise<string>`
-Reads the current text from the clipboard.
-
-- **Returns**: A promise that resolves to the clipboard text.
-
-- **Example**:
-  ```typescript
-  const clipboardText = await getCurrentClipboard();
-  console.log(clipboardText);
-  ```
-
----
-
-### Clipboard History Management
-
-#### `getClipboardHistory(): string[]`
-Retrieves the clipboard history.
-
-- **Returns**: An array of clipboard texts.
-
-- **Example**:
-  ```typescript
-  const history = getClipboardHistory();
-  console.log(history);
-  ```
-
----
-
-#### `addToHistory(text: string): void`
-Adds a new entry to the clipboard history.
-
-- **Parameters**:
-  - `text` *(string)*: The clipboard text to add.
-
-- **Example**:
-  ```typescript
-  addToHistory('New clipboard text');
-  ```
-
----
-
-#### `clearClipboardHistory(): void`
-Clears all entries in the clipboard history.
-
-- **Example**:
-  ```typescript
-  clearClipboardHistory();
-  ```
-
----
-
-#### `exportClipboardHistory(): string`
-Exports the clipboard history as a JSON string.
-
-- **Returns**: JSON string representation of the clipboard history.
-
-- **Example**:
-  ```typescript
-  const exportedHistory = exportClipboardHistory();
-  console.log(exportedHistory);
-  ```
-
----
-
-#### `importClipboardHistory(json: string): void`
-Imports clipboard history from a JSON string.
-
-- **Parameters**:
-  - `json` *(string)*: JSON string representing the clipboard history.
-
-- **Example**:
-  ```typescript
-  const historyJson = '[ "Clipboard text 1", "Clipboard text 2" ]';
-  importClipboardHistory(historyJson);
-  ```
-
----
-
-### Event Handling
-
-#### `onClipboardChange(callback: (text: string) => void): void`
-Registers a callback for clipboard change events.
-
-- **Parameters**:
-  - `callback` *(function)*: Function to execute when clipboard text changes. Receives the new clipboard text as an argument.
-
-- **Example**:
-  ```typescript
-  onClipboardChange((text) => {
-    console.log(`Clipboard changed: ${text}`);
-  });
-  ```
-
----
-
-#### `onClipboardMatch(pattern: RegExp, callback: (match: string) => void): void`
-Registers a callback for clipboard text that matches a specific regex pattern.
-
-- **Parameters**:
-  - `pattern` *(RegExp)*: Regular expression to match clipboard text.
-  - `callback` *(function)*: Function to execute when clipboard text matches the pattern. Receives the matched text as an argument.
-
-- **Example**:
-  ```typescript
-  onClipboardMatch(/http(s)?:\/\/\S+/i, (url) => {
-    console.log(`URL found in clipboard: ${url}`);
-  });
-  ```
-
----
-
-## Full Example
-
-Here’s how you can use the library:
+## 🚀 Quick Start
 
 ```typescript
-import { startWatching, stopWatching, setThrottle, getClipboardHistory, addToHistory, clearClipboardHistory, exportClipboardHistory, importClipboardHistory, onClipboardChange, onClipboardMatch } from 'clipwatch';
+import { startWatching, onClipboardChange } from 'clipwatch';
 
-// Start monitoring clipboard changes
-startWatching({ interval: 1000, private: false });
+// Start monitoring - it's that simple! 🎉
+startWatching();
 
-// Register a callback for clipboard changes
+// React to clipboard changes
 onClipboardChange((text) => {
-  console.log(`Clipboard changed: ${text}`);
+  console.log(`📋 New clipboard content: ${text}`);
 });
-
-// Register a regex matcher
-onClipboardMatch(/error/i, (match) => {
-  console.log(`Error found in clipboard: ${match}`);
-});
-
-// Change polling interval dynamically
-setThrottle(2000);
-
-// Get clipboard history
-console.log(getClipboardHistory());
-
-// Export clipboard history as JSON
-const exportedHistory = exportClipboardHistory();
-console.log(exportedHistory);
-
-// Import clipboard history from JSON
-importClipboardHistory('["Clipboard text 1", "Clipboard text 2"]');
-
-// Stop monitoring clipboard changes
-stopWatching();
 ```
 
 ---
 
-## Requirements
+## 📖 API Documentation
 
-- **Browser Environment**: The library relies on the `navigator.clipboard` API.
-- **Secure Context**: Clipboard API requires HTTPS or localhost.
+### 🔍 Clipboard Monitoring
 
----
+#### `startWatching(options?)`
+🟢 **Starts monitoring the clipboard for changes**
 
-## Limitations
+```typescript
+startWatching({ 
+  interval: 500,    // Check every 500ms ⚡
+  private: true     // Don't save history 🕵️
+});
+```
 
-- **Browser Compatibility**: Ensure the browser supports the `navigator.clipboard` API.
-- **Permission Handling**: Clipboard access requires user permission.
-
----
-
-## Contributing
-
-Contributions are welcome! Please submit issues or pull requests to the [GitHub repository](https://github.com/Persianwolf404/clipwatch).
-
----
-
-## License
-
-This project is licensed under the MIT License.
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `interval` | `number` | `1000` | Polling interval in milliseconds |
+| `private` | `boolean` | `false` | Enable private mode |
 
 ---
 
-## Author
+#### `stopWatching()`
+🔴 **Stops clipboard monitoring**
 
-Developed by [Persianwolf404](https://github.com/Persianwolf404).
+```typescript
+stopWatching(); // Pause monitoring 🛑
+```
 
 ---
 
-## Keywords
+#### `setThrottle(ms)`
+⚙️ **Dynamically adjust monitoring speed**
 
-- Clipboard
-- Utility
-- TypeScript
-- Clipboard Monitor
-- Open-Source
+```typescript
+setThrottle(2000); // Now checking every 2 seconds 🐢
+```
 
+---
+
+#### `getCurrentClipboard()`
+📋 **Get current clipboard content**
+
+```typescript
+const text = await getCurrentClipboard();
+console.log(`Current: ${text}`); // 📝
+```
+
+---
+
+### 📚 History Management
+
+#### `getClipboardHistory()`
+📜 **Retrieve all clipboard history**
+
+```typescript
+const history = getClipboardHistory();
+// Returns: ['Text 1', 'Text 2', ...] 📚
+```
+
+---
+
+#### `addToHistory(text)`
+➕ **Manually add to history**
+
+```typescript
+addToHistory('Custom entry'); // ✍️
+```
+
+---
+
+#### `clearClipboardHistory()`
+🗑️ **Clear all history**
+
+```typescript
+clearClipboardHistory(); // Fresh start! 🌟
+```
+
+---
+
+#### `exportClipboardHistory()`
+💾 **Export history as JSON**
+
+```typescript
+const backup = exportClipboardHistory();
+// Save to file, database, etc. 📦
+```
+
+---
+
+#### `importClipboardHistory(json)`
+📥 **Import history from JSON**
+
+```typescript
+importClipboardHistory(savedHistory); // Restore! 🔄
+```
+
+---
+
+### 🎯 Event Handling
+
+#### `onClipboardChange(callback)`
+👂 **Listen for any clipboard change**
+
+```typescript
+onClipboardChange((text) => {
+  console.log(`✨ Changed to: ${text}`);
+});
+```
+
+---
+
+#### `onClipboardMatch(pattern, callback)`
+🎯 **React to specific patterns**
+
+```typescript
+// Detect URLs 🌐
+onClipboardMatch(/https?:\/\/\S+/i, (url) => {
+  console.log(`🔗 URL detected: ${url}`);
+});
+
+// Detect emails 📧
+onClipboardMatch(/\S+@\S+\.\S+/, (email) => {
+  console.log(`📧 Email found: ${email}`);
+});
+
+// Detect passwords 🔐
+onClipboardMatch(/password:\s*(\S+)/i, (match) => {
+  console.log(`🚨 Password detected!`);
+});
+```
+
+---
+
+## 💡 Examples
+
+### 🎨 Complete Example
+
+```typescript
+import { 
+  startWatching, 
+  stopWatching, 
+  onClipboardChange, 
+  onClipboardMatch,
+  getClipboardHistory,
+  exportClipboardHistory 
+} from 'clipwatch';
+
+// 🚀 Start monitoring with custom settings
+startWatching({ 
+  interval: 500,
+  private: false 
+});
+
+// 📢 Log all changes
+onClipboardChange((text) => {
+  console.log(`📋 Clipboard: ${text}`);
+});
+
+// 🔗 Detect and process URLs
+onClipboardMatch(/https?:\/\/\S+/i, async (url) => {
+  console.log(`🌐 Opening URL: ${url}`);
+  // Could open in browser, validate, etc.
+});
+
+// 📧 Email detection
+onClipboardMatch(/\S+@\S+\.\S+/, (email) => {
+  console.log(`📮 Email copied: ${email}`);
+});
+
+// 💾 Save history before closing
+window.addEventListener('beforeunload', () => {
+  const history = exportClipboardHistory();
+  localStorage.setItem('clipboardHistory', history);
+  stopWatching(); // Clean up 🧹
+});
+```
+
+### 🛡️ Privacy-Focused Usage
+
+```typescript
+// Monitor without saving history
+startWatching({ private: true });
+
+onClipboardChange((text) => {
+  // Process sensitive data without storing
+  if (text.includes('password')) {
+    console.log('🔐 Sensitive data detected!');
+  }
+});
+```
+
+---
+
+## ⚙️ Requirements
+
+- 🌐 **Browser Environment** with `navigator.clipboard` API
+- 🔒 **Secure Context** (HTTPS or localhost)
+- 🎯 **TypeScript** 4.0+ (for development)
+
+---
+
+## ⚠️ Limitations
+
+- 🌍 **Browser Support**: Modern browsers only (Chrome 66+, Firefox 63+, Safari 13.1+)
+- 🔐 **Permissions**: User must grant clipboard access
+- 📱 **Mobile**: Limited support on mobile browsers
+
+---
+
+## 🤝 Contributing
+
+We love contributions! 💖 Here's how you can help:
+
+1. 🍴 Fork the repository
+2. 🌿 Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. 💻 Make your changes
+4. ✅ Run tests (`npm test`)
+5. 📝 Commit (`git commit -m 'Add amazing feature'`)
+6. 🚀 Push (`git push origin feature/amazing-feature`)
+7. 🎉 Open a Pull Request
+
+Check out our [Contributing Guide](CONTRIBUTING.md) for more details!
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+```
+MIT License
+
+Copyright (c) 2024 Persianwolf404
+
+Permission is hereby granted, free of charge...
+```
+
+---
+
+## 👨‍💻 Author
+
+<div align="center">
+
+Created with ❤️ by **[Persianwolf404](https://github.com/Persianwolf404)**
+</div>
+
+---
+
+## 🏷️ Keywords
+
+`clipboard` • `clipboard-monitor` • `clipboard-manager` • `typescript` • `clipboard-history` • `clipboard-watcher` • `clipboard-api` • `regex-matcher` • `event-emitter` • `browser-api` • `utility-library` • `open-source`
+
+---
+
+<div align="center">
+
+### ⭐ Star us on GitHub!
+
+If you find Clipwatch useful, please consider giving it a star! It helps others discover the project.
+
+[![Star on GitHub](https://img.shields.io/github/stars/Persianwolf404/clipwatch.svg?style=social)](https://github.com/Persianwolf404/clipwatch)
+
+</div>
+```
