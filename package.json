@@ -1,0 +1,32 @@
+{
+  "name": "clipwatch",
+  "version": "1.0.0",
+  "description": "A TypeScript utility library to monitor clipboard changes",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Persianwolf404/clipwatch.git"
+  },
+  "keywords": [
+    "clipboard",
+    "utility",
+    "typescript",
+    "clipboard-monitor",
+    "open-source"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.0.0",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.0.0"
+  }
+}
