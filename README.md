@@ -330,4 +330,3 @@ If you find Clipwatch useful, please consider giving it a star! It helps others 
 [![Star on GitHub](https://img.shields.io/github/stars/Persianwolf404/clipwatch.svg?style=social)](https://github.com/Persianwolf404/clipwatch)
 
 </div>
-```
